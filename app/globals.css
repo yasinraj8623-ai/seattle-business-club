@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-manrope: "Manrope", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
+
+  --button-primary: hsla(233, 94%, 63%, 1);
+}
+
+
+body {
+
+}
