@@ -7,12 +7,25 @@ import TieIcon from "@/components/icons/TieIcon";
 import ClubIcon from "@/components/icons/ClubIcon";
 import BriefcaseIcon from "@/components/icons/BriefcaseIcon";
 import { FadeIn, Reveal, StaggerGroup, StaggerItem } from "@/components/motion/reveal";
+import { Metadata } from "next";
 
 const included = [
   { icon: BriefcaseIcon, title: "Business Spotlight" },
   { icon: ClubIcon, title: "Club Merchandise & Perks" },
   { icon: TieIcon, title: "Business & Founder Networking" },
 ];
+
+export const metadata: Metadata = {
+  title: "Apply for Membership",
+  description: "Helping Seattle businesses get discovered, connected, and growing.",
+  alternates: { canonical: "/join" },
+
+  openGraph: {
+    title: "Join Seattle Business Club",
+    description: "Apply for membership: business spotlight, founder networking, and club perks.",
+    url: "/join",
+  },
+};
 
 export default function JoinPage() {
   return (
