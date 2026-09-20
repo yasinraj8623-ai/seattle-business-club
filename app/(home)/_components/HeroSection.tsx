@@ -30,16 +30,16 @@ const item = {
 const HeroSection: React.FC = () => {
   return (
     <section className="relative h-160 sm:h-180 md:h-200 lg:h-225 w-full overflow-hidden">
-      <div
-        data-speed="0.85"
-        className="absolute inset-0 bg-no-repeat scale-115"
-        style={{
-          backgroundImage: "url('/images/hero-background.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "bottom right",
-          transform: "scaleX(-1)",
-        }}
-      />
+      <div data-speed="0.85" className="absolute inset-0 scale-115">
+        <Image
+          src="/images/hero-background.png"
+          alt=""
+          fill
+          preload
+          sizes="100vw"
+          className="object-cover object-bottom-right -scale-x-100"
+        />
+      </div>
 
       <div
         className="absolute inset-0"
@@ -99,7 +99,6 @@ const HeroSection: React.FC = () => {
               }}
             >
               <Image
-                loading="eager"
                 width={128}
                 height={227}
                 src="/images/hero-image.jpg"

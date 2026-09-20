@@ -75,7 +75,7 @@ export default function NetworkEvents() {
                     src={event.image}
                     alt={event.title}
                     fill
-                    sizes="(min-width: 768px) 270px, 40vw"
+                    sizes="(min-width: 1024px) 270px, (min-width: 768px) 216px, 100vw"
                     className="object-cover"
                   />
                 </div>
