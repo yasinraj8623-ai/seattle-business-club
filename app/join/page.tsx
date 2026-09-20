@@ -15,13 +15,31 @@ const included = [
 
 export const metadata: Metadata = {
   title: "Apply for Membership",
-  description: "Helping Seattle businesses get discovered, connected, and growing.",
+  description: "Apply for Seattle Business Club membership: business spotlight, founder networking, and club perks.",
   alternates: { canonical: "/join" },
 
   openGraph: {
+    type: "website",
+    url: "/join",
+    siteName: "Seattle Business Club",
+    locale: "en_US",
     title: "Join Seattle Business Club",
     description: "Apply for membership: business spotlight, founder networking, and club perks.",
-    url: "/join",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Seattle Business Club",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Join Seattle Business Club",
+    description: "Apply for membership: business spotlight, founder networking, and club perks.",
+    images: ["/images/og-image.png"],
   },
 };
 

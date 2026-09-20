@@ -27,12 +27,9 @@ export const metadata: Metadata = {
   },
   description: "Helping Seattle businesses get discovered, connected, and growing.",
   applicationName: "Seattle Business Club",
-  alternates: { canonical: "/" },
 
-  // Facebook / LinkedIn / WhatsApp / Slack, etc.
   openGraph: {
     type: "website",
-    url: "/",
     siteName: "Seattle Business Club",
     locale: "en_US",
     title: "Seattle Business Club",
@@ -47,14 +44,11 @@ export const metadata: Metadata = {
     ],
   },
 
-  // Twitter / X
   twitter: {
     card: "summary_large_image",
     title: "Seattle Business Club",
     description: "Helping Seattle businesses get discovered, connected, and growing.",
     images: ["/images/og-image.png"],
-    // site: "@xhandle",
-    // creator: "@xhandle",
   },
 
   robots: {
@@ -86,7 +80,6 @@ const siteSchema = {
         addressRegion: "WA",
         addressCountry: "US",
       },
-      // sameAs: ["https://www.instagram.com/[insta-handle]", "https://www.linkedin.com/company/[pagename]"],
     },
     {
       "@type": "WebSite",
