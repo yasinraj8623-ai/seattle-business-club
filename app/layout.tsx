@@ -27,6 +27,13 @@ export const metadata: Metadata = {
   },
   description: "Helping Seattle businesses get discovered, connected, and growing.",
   applicationName: "Seattle Business Club",
+  keywords: [
+    "Seattle Business Club",
+    "Seattle business community",
+    "Seattle business networking",
+    "Seattle small businesses",
+    "Seattle business growth",
+  ],
 
   openGraph: {
     type: "website",
