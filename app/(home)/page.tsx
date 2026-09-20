@@ -14,11 +14,11 @@ export default function Home() {
 
       <FeaturedSection />
 
+      <CTASection />
+
       <EventCoverage />
 
       <NetworkEvents />
-
-      <CTASection />
     </main>
   );
 }

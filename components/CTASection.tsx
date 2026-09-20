@@ -4,7 +4,7 @@ import { DocumentIcon, PenIcon, SparkleIcon } from "./icons";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/reveal";
 import SolidLinkButton from "./ui/SolidLinkButton";
 import Image from "next/image";
-import { handleAnchorClick } from "@/lib/Smoothscroll";
+// import { handleAnchorClick } from "@/lib/Smoothscroll";
 
 const services = [
   { icon: SparkleIcon, title: "Build Your Brand", description: "Branding & visual identity." },
@@ -40,7 +40,7 @@ export default function CTASection() {
                   Through our creative partner,
                   <br />
                   <span className="bg-[linear-gradient(90deg,#93B1EB_0%,#4A5DF9_100%)] bg-clip-text text-transparent font-bold inline">
-                    Seattle Creative Studio.
+                    Remusa.
                   </span>
                 </h3>
                 <p className="text-white leading-[150%] mt-4">
@@ -48,9 +48,8 @@ export default function CTASection() {
                   tell their stories — so growth isn&rsquo;t left to chance.
                 </p>
               </div>
-              <SolidLinkButton href="#services" onClick={(e) => handleAnchorClick(e, "#services")}>
-                Explore Services
-              </SolidLinkButton>
+
+              <SolidLinkButton href="https://remusa.agency">Explore Services</SolidLinkButton>
             </Reveal>
 
             <StaggerGroup className="grid grid-cols-1 sm:grid-cols-3 lg:flex lg:gap-3 gap-3 w-full lg:w-auto shrink-0">

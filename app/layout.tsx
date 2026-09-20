@@ -86,7 +86,7 @@ const siteSchema = {
         addressRegion: "WA",
         addressCountry: "US",
       },
-      sameAs: ["https://www.instagram.com/[insta-handle]", "https://www.linkedin.com/company/[pagename]"],
+      // sameAs: ["https://www.instagram.com/[insta-handle]", "https://www.linkedin.com/company/[pagename]"],
     },
     {
       "@type": "WebSite",
