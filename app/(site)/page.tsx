@@ -1,4 +1,4 @@
-import HeroSection from "@/app/(home)/_components/HeroSection";
+import HeroSection from "@/app/(site)/_components/HeroSection";
 import EventCoverage from "./_components/EventCoverage";
 import ServicesSection from "./_components/ServicesSection";
 import FeaturedSection from "./_components/FeaturedSection";

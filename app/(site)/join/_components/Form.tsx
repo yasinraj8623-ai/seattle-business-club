@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { startTransition, useActionState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 import { fadeUp } from "@/components/motion/reveal";
@@ -15,6 +15,7 @@ import SendIcon from "@/components/icons/SendIcon";
 import Field from "./Field";
 import IconInput from "./IconInput";
 import SelectInput from "./SelectInput";
+import { submitApplication, type ApplyState } from "../actions";
 
 const inputClass =
   "w-full border border-[rgba(36,36,36,0.60)] bg-[rgba(0,0,0,0.64)] backdrop-blur-md rounded-xs px-4 py-3 text-sm text-white placeholder:text-[#8C8C8C] leading-5 outline-none transition-colors focus:border-[#4A5DF9]";
@@ -22,15 +23,26 @@ const inputClass =
 const textareaClass = `${inputClass} resize-y min-h-[80px] max-h-[180px]`;
 
 const Form = () => {
-  const [submitted, setSubmitted] = React.useState(false);
+  const [state, formAction, pending] = useActionState<ApplyState, FormData>(submitApplication, { ok: false });
 
-  function handleSubmit(e: React.SubmitEvent) {
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const hasErrors = (state.errors?.length ?? 0) > 0;
+
+  // Clear the fields only on success. On errors we keep what the user typed.
+  useEffect(() => {
+    if (state.ok) formRef.current?.reset();
+  }, [state]);
+
+  function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    const formData = new FormData(e.currentTarget);
+    startTransition(() => formAction(formData));
   }
 
   return (
     <motion.form
+      ref={formRef}
       onSubmit={handleSubmit}
       initial="hidden"
       animate="visible"
@@ -38,6 +50,16 @@ const Form = () => {
       transition={{ delay: 0.1 }}
       className="space-y-6 pt-8 sm:pt-12 px-4 sm:px-8 pb-6 sm:pb-8 border border-[rgba(36,36,36,0.60)] bg-[rgba(0,0,0,0.64)] backdrop-blur-md"
     >
+      {/* Honeypot: hidden from humans, bots tend to fill it */}
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+      />
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-6">
         <Field label="First Name" required>
           <input name="firstName" type="text" placeholder="Yasin" required className={inputClass} />
@@ -59,7 +81,7 @@ const Form = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-6">
         <Field label="Age" required>
-          <input name="age" type="number" min={0} placeholder="Enter your age" required className={inputClass} />
+          <input name="age" type="number" min={18} placeholder="Enter your age" required className={inputClass} />
         </Field>
         <Field label="City">
           <SelectInput name="city" defaultValue="">
@@ -81,7 +103,13 @@ const Form = () => {
 
       <Field label="LinkedIn Profile" required>
         <IconInput icon={<LinkedInIcon />}>
-          <input name="linkedin" type="url" placeholder="linkedin.com/in/yourprofile" required className={inputClass} />
+          <input
+            name="linkedin"
+            type="text"
+            placeholder="linkedin.com/in/yourprofile"
+            required
+            className={inputClass}
+          />
         </IconInput>
       </Field>
 
@@ -93,13 +121,13 @@ const Form = () => {
         </Field>
         <Field label="Website" optional>
           <IconInput icon={<GlobeIcon />}>
-            <input name="website" type="url" placeholder="yourwebsite.com" className={inputClass} />
+            <input name="website" type="text" placeholder="yourwebsite.com" className={inputClass} />
           </IconInput>
         </Field>
       </div>
 
       <Field label="How did you find out about Seattle Business Club?" required>
-        <SelectInput name="source" defaultValue="">
+        <SelectInput name="source" defaultValue="" required>
           <option value="" disabled>
             Select an option
           </option>
@@ -173,12 +201,27 @@ const Form = () => {
       <HoverScale className="block w-full">
         <button
           type="submit"
-          className="group cursor-pointer flex w-full items-center justify-center gap-2 rounded-xs bg-[#5B9CFF] hover:bg-[#4A5DF9] hover:bg-[radial-gradient(47.16%_130.25%_at_68.75%_-16.25%,rgba(255,255,255,0.30)_0%,rgba(255,255,255,0)_100%)] shadow-[0_10px_15px_-3px_rgba(0,0,0,0.10),0_4px_6px_-4px_rgba(0,0,0,0.10)] px-6 py-4 font-semibold text-[rgba(11,11,19,0.70)] hover:text-white transition-colors duration-300 ease-out"
+          disabled={pending || state.ok}
+          className="group cursor-pointer flex w-full items-center justify-center gap-2 rounded-xs bg-[#5B9CFF] hover:bg-[#4A5DF9] hover:bg-[radial-gradient(47.16%_130.25%_at_68.75%_-16.25%,rgba(255,255,255,0.30)_0%,rgba(255,255,255,0)_100%)] shadow-[0_10px_15px_-3px_rgba(0,0,0,0.10),0_4px_6px_-4px_rgba(0,0,0,0.10)] px-6 py-4 font-semibold text-[rgba(11,11,19,0.70)] hover:text-white transition-colors duration-300 ease-out disabled:cursor-not-allowed disabled:opacity-60"
         >
-          <span>{submitted ? "Application Sent" : "Submit Application"}</span>
+          <span>{state.ok ? "Application Sent" : pending ? "Sending..." : "Submit Application"}</span>
           <SendIcon className="stroke-current group-hover:stroke-current" />
         </button>
       </HoverScale>
+
+      {hasErrors && (
+        <div role="alert" className="border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-200 space-y-1">
+          {state.errors!.map((message) => (
+            <p key={message}>{message}</p>
+          ))}
+        </div>
+      )}
+
+      {state.ok && (
+        <div role="status" className="border border-green-500/40 bg-green-500/10 px-4 py-3 text-sm text-green-200">
+          Thanks! Your application has been received. We&rsquo;ll be in touch within 48–72 hours.
+        </div>
+      )}
 
       <p className="text-center text-xs leading-[140%] text-[#8C8C8C]">
         Applications are reviewed within 48–72 hours. Seattle Business Club is a paid members community — approved

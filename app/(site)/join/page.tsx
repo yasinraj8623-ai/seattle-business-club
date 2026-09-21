@@ -1,11 +1,11 @@
 import Image from "next/image";
 
-import Form from "./_components/Form";
 import TieIcon from "@/components/icons/TieIcon";
 import ClubIcon from "@/components/icons/ClubIcon";
 import BriefcaseIcon from "@/components/icons/BriefcaseIcon";
 import { FadeIn, Reveal, StaggerGroup, StaggerItem } from "@/components/motion/reveal";
 import { Metadata } from "next";
+import Form from "./_components/Form";
 
 const included = [
   { icon: BriefcaseIcon, title: "Business Spotlight" },

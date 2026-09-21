@@ -1,0 +1,25 @@
+CREATE TYPE "public"."application_status" AS ENUM('pending', 'approved', 'rejected');--> statement-breakpoint
+CREATE TABLE "applications" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"first_name" text NOT NULL,
+	"last_name" text NOT NULL,
+	"email" text NOT NULL,
+	"phone" text NOT NULL,
+	"age" integer NOT NULL,
+	"city" text,
+	"profession" text,
+	"linkedin" text NOT NULL,
+	"instagram" text,
+	"website" text,
+	"source" text NOT NULL,
+	"passion" text NOT NULL,
+	"one_message" text NOT NULL,
+	"why_join" text NOT NULL,
+	"introduction" text,
+	"referral_code" text,
+	"status" "application_status" DEFAULT 'pending' NOT NULL,
+	"reviewed_at" timestamp with time zone,
+	"notes" text,
+	CONSTRAINT "applications_email_unique" UNIQUE("email")
+);

@@ -7,7 +7,6 @@
   --button-primary: hsla(233, 94%, 63%, 1);
 }
 
-
-body {
-
+button{
+  cursor: pointer;
 }

@@ -71,44 +71,10 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-const siteSchema = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": `${siteUrl}/#organization`,
-      name: "Seattle Business Club",
-      url: siteUrl,
-      logo: `${siteUrl}/logo.png`, // PNG, 112x112 px minimum
-      email: "contact@seattlebusinessclub.com",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Seattle",
-        addressRegion: "WA",
-        addressCountry: "US",
-      },
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${siteUrl}/#website`,
-      url: siteUrl,
-      name: "Seattle Business Club",
-      publisher: { "@id": `${siteUrl}/#organization` },
-    },
-  ],
-};
-
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${manrope.variable} ${outfit.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-manrope">
-        <JsonLd data={siteSchema} />
-        <Navber />
-        <SmoothScroll>
-          {children}
-          <Footer />
-        </SmoothScroll>
-      </body>
+      <body className="min-h-full flex flex-col font-manrope">{children}</body>
     </html>
   );
 }
