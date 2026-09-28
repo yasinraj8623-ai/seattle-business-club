@@ -52,7 +52,7 @@ const HeroSection: React.FC = () => {
       />
 
       <div className="relative z-10 max-w-[1600px] h-full mx-auto px-5 sm:px-6 md:px-10">
-        <div className="hidden md:block absolute inset-y-0 inset-x-5 sm:inset-x-6 md:inset-x-10 max-w-108.5 bg-[rgb(91_156_255/5%)] backdrop-blur-[7.5px]" />
+        <div className="hidden md:block absolute inset-y-0 inset-x-5 sm:inset-x-6 md:inset-x-10 max-w-120 bg-[rgb(91_156_255/5%)] backdrop-blur-[7.5px]" />
 
         <div className="relative h-full flex flex-col md:flex-row gap-10 md:gap-20 justify-center">
           <div data-speed="1.35" className="md:pl-8 lg:pl-19.25 flex flex-col justify-center">

@@ -79,9 +79,9 @@ export default function Footer() {
                 viewport={{ once: true, amount: 0.4 }}
                 variants={slideInRight}
                 transition={{ delay: 0.08 }}
-                className="block text-[#979BA3] text-right font-normal tracking-tight"
+                className="block whitespace-nowrap text-[0.5em] sm:text-[0.6em] xl:text-[0.65em] text-[#979BA3] text-right font-normal tracking-tight"
               >
-                BUSINESS
+                BUSINESS CLUB
               </motion.span>
             </h2>
           </div>

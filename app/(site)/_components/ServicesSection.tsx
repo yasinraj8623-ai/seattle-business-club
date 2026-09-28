@@ -38,7 +38,7 @@ export default function ServicesSection() {
           <h2 className="text-sm font-bold text-[#4A5DF9] tracking-wide">WHAT WE DO</h2>
           <ScrollRevealText
             className="text-xl sm:text-2xl lg:text-3xl text-[#1E1E1E] leading-[150%] font-medium"
-            text="We're an event management club dedicated to helping local organizations thrive through expert planning, promotion, and execution. From small gatherings to large-scale events, we craft seamless experiences and memorable moments that foster community engagement and lasting connections."
+            text="We spotlight the people and businesses building something meaningful in Seattle. From community events to founder stories, we create opportunities to connect, learn, and grow."
           />
         </Reveal>
 

@@ -15,6 +15,7 @@ export function passwordMatches(input: string) {
 
 export async function createSession() {
   const exp = String(Date.now() + MAX_AGE * 1000);
+
   (await cookies()).set(COOKIE, `${exp}.${sign(exp)}`, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",

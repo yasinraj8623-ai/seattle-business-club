@@ -65,10 +65,16 @@ export default function JoinPage() {
                   Seattle Business Club
                 </span>
               </h3>
-              <p className="text-white text-base sm:text-lg md:text-[20px] leading-[150%] mt-4">
-                Businesses and startups get professional support to build their brands, design their products, and tell
-                their stories — so growth isn&rsquo;t left to chance.
-              </p>
+              <div className="text-white text-base sm:text-lg leading-[150%] mt-4 space-y-3">
+                <p>
+                  Applications are reviewed within 48–72 hours. Seattle Business Club is a paid members community —
+                  approved applicants will receive payment details by email
+                </p>
+                <p>
+                  Limited offer: the first 100 approved members lock in $100/month for life. Rates will increase in the
+                  future.
+                </p>
+              </div>
             </FadeIn>
 
             <div className="w-full lg:max-w-3xl space-y-6">
