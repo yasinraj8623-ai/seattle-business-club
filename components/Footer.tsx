@@ -6,10 +6,11 @@ import { motion } from "framer-motion";
 import { Reveal, slideInLeft, slideInRight } from "@/components/motion/reveal";
 
 const exploreLinks = [
-  { label: "Services", href: "#" },
-  { label: "Work", href: "#" },
-  { label: "Pricing", href: "#" },
-  { label: "Network Events", href: "#" },
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/#services" },
+  { label: "Events", href: "https://www.eventbrite.com" },
+  { label: "Blogs", href: "/blogs" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Footer() {

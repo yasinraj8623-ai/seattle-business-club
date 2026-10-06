@@ -30,7 +30,7 @@ export default function EventCoverage() {
               We bring a camera and guest list
             </h2>
             <div>
-              <MagneticLinkButton className="text-nowrap" href="/events" variant="secondary">
+              <MagneticLinkButton className="text-nowrap" href="https://www.eventbrite.com" variant="secondary">
                 Explore Events
               </MagneticLinkButton>
             </div>

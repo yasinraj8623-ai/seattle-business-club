@@ -1,8 +1,8 @@
 import HeroSection from "@/app/(site)/_components/HeroSection";
 import EventCoverage from "./_components/EventCoverage";
 import ServicesSection from "./_components/ServicesSection";
-import FeaturedSection from "./_components/FeaturedSection";
-import NetworkEvents from "./_components/NetworkEvents";
+import FeaturedBlogSection from "./_components/FeaturedBlogSection";
+import UpcomingEvents from "./_components/UpcomingEvents";
 import CTASection from "@/components/CTASection";
 import { Metadata } from "next";
 
@@ -33,13 +33,13 @@ export default function Home() {
 
       <ServicesSection />
 
-      <FeaturedSection />
+      <FeaturedBlogSection />
 
       <CTASection />
 
       <EventCoverage />
 
-      <NetworkEvents />
+      <UpcomingEvents />
     </main>
   );
 }

@@ -16,9 +16,10 @@ gsap.registerPlugin(ScrollSmoother);
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/#services" },
-  { label: "Features", href: "/#features" },
-  { label: "Events", href: "/#network-events" },
+  { label: "Events", href: "https://www.eventbrite.com" },
+  { label: "Blogs", href: "/blogs" },
   { label: "Community Requests", href: "#" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const EASE = [0.16, 1, 0.3, 1] as const;
