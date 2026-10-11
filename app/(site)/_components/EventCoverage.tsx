@@ -5,11 +5,11 @@ import ScrollStack from "@/components/scroll/ScrollStack";
 import MagneticLinkButton from "@/components/ui/MagneticLinkButton";
 
 const coverage = [
-  { video: "/videos/brand-storytelling-night.mp4", location: "Capitol Hill Studio", title: "Brand Storytelling Night" },
+  { video: "/videos/v1.mp4", location: "Location 1", title: "Title 1" },
   {
-    video: "/videos/creators-local-brands-mixer.mp4",
-    location: "Ballard Commons",
-    title: "Creators × Local Brands Mixer",
+    video: "/videos/v2.mp4",
+    location: "Location 2",
+    title: "Title 2",
   },
 ];
 
