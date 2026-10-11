@@ -5,9 +5,9 @@ import ScrollStack from "@/components/scroll/ScrollStack";
 import MagneticLinkButton from "@/components/ui/MagneticLinkButton";
 
 const coverage = [
-  { video: "/videos/v1.mp4", location: "Location 1", title: "Title 1" },
+  { video: "/videos/v-1.mp4", location: "Location 1", title: "Title 1" },
   {
-    video: "/videos/v2.mp4",
+    video: "/videos/v-2.mp4",
     location: "Location 2",
     title: "Title 2",
   },

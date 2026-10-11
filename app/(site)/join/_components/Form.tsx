@@ -222,14 +222,14 @@ const Form = () => {
           Thanks! Your application has been received. We&rsquo;ll be in touch within 48–72 hours.
         </div>
       )}
-
+      {/* 
       <p className="text-center text-xs leading-[140%] text-[#8C8C8C]">
         Applications are reviewed within 48–72 hours. Seattle Business Club is a paid members community — approved
         applicants will receive payment details by email.
         <span className="font-semibold text-[#EFEFEF]">
           Limited offer: the first 100 approved members lock in $100/month for life. Rates will increase in the future.
         </span>{" "}
-      </p>
+      </p> */}
     </motion.form>
   );
 };
