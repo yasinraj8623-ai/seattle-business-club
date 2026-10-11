@@ -4,10 +4,10 @@ import { z } from "zod";
 import { db } from "@/db";
 import { applications, applicationStatus } from "@/db/schema";
 import { requireAdmin } from "@/lib/admin-auth";
-import AdminFilters from "./_components/AdminFilters";
+import AdminFilters from "./(panel)/applications/_components/AdminFilters";
 import ApplicationRow from "./_components/ApplicationRow";
 import LogoutButton from "./_components/LogoutButton";
-import type { AdminApplication } from "./_components/types";
+import type { AdminApplication } from "./(panel)/applications/_components/types";
 
 const PAGE_SIZE = 20;
 const TZ = "America/Los_Angeles";

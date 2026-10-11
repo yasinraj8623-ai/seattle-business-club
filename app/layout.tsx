@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Outfit } from "next/font/google";
+import { Manrope, Outfit, Inter } from "next/font/google";
 import SmoothScroll from "@/components/scroll/SmoothScroll";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Navber from "@/components/Navber";
 import JsonLd from "@/components/JsonLd";
+import { cn } from "@/lib/utils";
+
+const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -73,7 +76,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${manrope.variable} ${outfit.variable} h-full antialiased`}>
+    <html lang="en" className={cn("h-full", "antialiased", manrope.variable, outfit.variable, "font-sans", inter.variable)}>
       <body className="min-h-full flex flex-col font-manrope">{children}</body>
     </html>
   );

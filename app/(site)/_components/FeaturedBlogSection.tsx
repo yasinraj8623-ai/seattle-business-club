@@ -1,34 +1,22 @@
-"use client";
-
 import Image from "next/image";
+import Link from "next/link";
+import { desc, eq } from "drizzle-orm";
+import { db } from "@/db";
+import { blogs } from "@/db/schema";
+import { formatEventDate } from "@/lib/events";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/reveal";
 import SolidLinkButton from "@/components/ui/SolidLinkButton";
-import Link from "next/link";
 
-const featuredblogs = [
-  {
-    image: "image-1",
-    publishedDate: "October 15, 2023",
-    title: "7 Event Ticket-Pricing Strategies to Maximize Attendance",
-  },
-  {
-    image: "image-2",
-    publishedDate: "October 10, 2023",
-    title: "Layers, Not Labels: How to Channel the Power of Event Mashups",
-  },
-  {
-    image: "image-3",
-    publishedDate: "October 5, 2023",
-    title: "How to Plan an Event: Your Ultimate Event Planning Guide",
-  },
-  {
-    image: "image-4",
-    publishedDate: "September 28, 2023",
-    title: "Exciting Team Workshop Ideas for Memorable Events",
-  },
-];
+export default async function FeaturedBlogSection() {
+  const posts = await db
+    .select({ slug: blogs.slug, title: blogs.title, coverImage: blogs.coverImage, publishedAt: blogs.publishedAt })
+    .from(blogs)
+    .where(eq(blogs.published, true))
+    .orderBy(desc(blogs.publishedAt), desc(blogs.createdAt))
+    .limit(4);
 
-export default function FeaturedBlogSection() {
+  if (posts.length === 0) return null;
+
   return (
     <section id="features" className="relative overflow-hidden">
       <Image
@@ -54,12 +42,12 @@ export default function FeaturedBlogSection() {
           </Reveal>
 
           <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 xl:gap-5 items-stretch px-4 sm:px-0">
-            {featuredblogs.map((blog, i) => (
-              <StaggerItem key={i} className="group h-full flex flex-col rounded-xs overflow-hidden isolate">
-                <Link href={`/blogs/${blog.image}`} className="h-full flex flex-col">
+            {posts.map((blog) => (
+              <StaggerItem key={blog.slug} className="group h-full flex flex-col rounded-xs overflow-hidden isolate">
+                <Link href={`/blogs/${blog.slug}`} className="h-full flex flex-col">
                   <div className="relative aspect-3/2 shrink-0">
                     <Image
-                      src={`/images/${blog.image}.jpg`}
+                      src={blog.coverImage}
                       alt={blog.title}
                       fill
                       sizes="(min-width: 1600px) 365px, (min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
@@ -68,7 +56,7 @@ export default function FeaturedBlogSection() {
                   </div>
 
                   <div className="flex-1 flex flex-col p-5 space-y-6 border border-[rgba(255,255,255,0.12)] bg-[rgba(255,255,255,0.06)] backdrop-blur-[10px] transition-colors duration-300 group-hover:bg-white">
-                    <p className="text-[#4A5DF9] text-xs leading-[120%]">{blog.publishedDate}</p>
+                    <p className="text-[#4A5DF9] text-xs leading-[120%]">{formatEventDate(blog.publishedAt).label}</p>
 
                     <div className="space-y-2 flex-1 flex flex-col justify-between">
                       <h3 className="text-white text-xl md:text-2xl font-outfit font-medium leading-[120%] tracking-[-0.5px] transition-colors duration-300 group-hover:text-black">

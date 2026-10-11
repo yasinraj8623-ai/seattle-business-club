@@ -62,20 +62,20 @@ const Form = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-6">
         <Field label="First Name" required>
-          <input name="firstName" type="text" placeholder="Yasin" required className={inputClass} />
+          <input name="firstName" type="text" placeholder="John" required className={inputClass} />
         </Field>
         <Field label="Last Name" required>
-          <input name="lastName" type="text" placeholder="Raj" required className={inputClass} />
+          <input name="lastName" type="text" placeholder="Doe" required className={inputClass} />
         </Field>
       </div>
 
       <Field label="Email Address" required>
-        <input name="email" type="email" placeholder="yasinraj@email.com" required className={inputClass} />
+        <input name="email" type="email" placeholder="john.doe@email.com" required className={inputClass} />
       </Field>
 
       <Field label="Phone Number" required>
         <IconInput icon={<PhoneIcon />}>
-          <input name="phone" type="tel" placeholder="(555) 123-4567" required className={inputClass} />
+          <input name="phone" type="tel" placeholder="(555) 000-0000" required className={inputClass} />
         </IconInput>
       </Field>
 

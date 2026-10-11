@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import type { ApplicationStatus } from "@/db/schema";
 import { saveNotes, setStatus } from "../actions";
-import type { AdminApplication } from "./types";
+import type { AdminApplication } from "../(panel)/applications/_components/types";
 
 const BADGE: Record<ApplicationStatus, string> = {
   pending: "bg-amber-100 text-amber-800",

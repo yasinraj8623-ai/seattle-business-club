@@ -14,7 +14,7 @@ export async function login(formData: FormData) {
   const pw = String(formData.get("password") ?? "");
   if (!passwordMatches(pw)) redirect("/admin/login?error=1");
   await createSession();
-  redirect("/admin");
+  redirect("/admin/dashboard");
 }
 
 export async function logout() {
@@ -41,7 +41,8 @@ export async function setStatus(id: string, status: ApplicationStatus): Promise<
     return { ok: false, error: "Could not update status. Try again." };
   }
 
-  revalidatePath("/admin");
+  revalidatePath("/admin/applications");
+  revalidatePath("/admin/dashboard");
   return { ok: true };
 }
 
@@ -61,6 +62,6 @@ export async function saveNotes(id: string, notes: string): Promise<ActionResult
     return { ok: false, error: "Could not save notes. Try again." };
   }
 
-  revalidatePath("/admin");
+  revalidatePath("/admin/applications");
   return { ok: true };
 }

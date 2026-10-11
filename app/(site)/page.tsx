@@ -6,6 +6,8 @@ import UpcomingEvents from "./_components/UpcomingEvents";
 import CTASection from "@/components/CTASection";
 import { Metadata } from "next";
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
