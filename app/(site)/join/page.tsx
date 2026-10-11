@@ -60,19 +60,15 @@ export default function JoinPage() {
             <FadeIn className="lg:max-w-xl shrink-0">
               <h2 className="text-sm font-bold text-[#4A5DF9] tracking-wide">Apply for membership</h2>
               <h3 className="text-white text-[28px] sm:text-[32px] md:text-[40px] font-medium leading-[120%] mt-6">
-                Join{" "}
+                Free Membership —{" "}
                 <span className="bg-[linear-gradient(90deg,#93B1EB_0%,#4A5DF9_100%)] bg-clip-text text-transparent font-bold inline">
-                  Seattle Business Club
+                  For Now
                 </span>
               </h3>
               <div className="text-white text-base sm:text-lg leading-[150%] mt-4 space-y-3">
                 <p>
-                  Applications are reviewed within 48–72 hours. Seattle Business Club is a paid members community —
-                  approved applicants will receive payment details by email
-                </p>
-                <p>
-                  Limited offer: the first 100 approved members lock in $100/month for life. Rates will increase in the
-                  future.
+                  Join the Seattle Business Club community at no cost. All applications are reviewed within 48–72 hours.
+                  Once your application has been reviewed, you’ll receive an email confirming your membership status.
                 </p>
               </div>
             </FadeIn>
