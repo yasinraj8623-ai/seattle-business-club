@@ -18,7 +18,7 @@ const navLinks = [
   { label: "Services", href: "/#services" },
   { label: "Events", href: "https://www.eventbrite.com" },
   { label: "Blogs", href: "/blogs" },
-  { label: "Community Requests", href: "#" },
+  { label: "Community Requests", href: "/community-requests" },
   { label: "Contact", href: "/contact" },
 ];
 

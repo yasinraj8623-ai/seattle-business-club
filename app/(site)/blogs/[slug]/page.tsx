@@ -3,7 +3,6 @@ import "prosekit/basic/typography.css";
 
 import { cache } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { and, desc, eq, ne } from "drizzle-orm";
