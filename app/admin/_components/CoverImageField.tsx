@@ -2,9 +2,16 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/shadcn/button";
-import { uploadImage } from "@/lib/blog-uploader";
+import { uploadImage, type UploadFolder } from "@/lib/blog-uploader";
 
-export default function CoverImageField({ defaultValue = "", error }: { defaultValue?: string; error?: string }) {
+type Props = {
+  name?: string;
+  folder?: UploadFolder;
+  defaultValue?: string;
+  error?: string;
+};
+
+export default function CoverImageField({ name = "coverImage", folder = "blog", defaultValue = "", error }: Props) {
   const [url, setUrl] = useState(defaultValue);
   const [progress, setProgress] = useState<number | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
@@ -17,7 +24,7 @@ export default function CoverImageField({ defaultValue = "", error }: { defaultV
     setUploadError(null);
     setProgress(0);
     try {
-      setUrl(await uploadImage(file, ({ loaded, total }) => setProgress(total ? loaded / total : 0)));
+      setUrl(await uploadImage(file, ({ loaded, total }) => setProgress(total ? loaded / total : 0), folder));
     } catch (err) {
       setUploadError(err instanceof Error ? err.message : "Upload failed");
     } finally {
@@ -29,12 +36,12 @@ export default function CoverImageField({ defaultValue = "", error }: { defaultV
 
   return (
     <div className="space-y-2">
-      <input type="hidden" name="coverImage" value={url} />
+      <input type="hidden" name={name} value={url} />
 
       {url && (
         <div className="aspect-3/2 w-full max-w-sm overflow-hidden border bg-gray-100">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={url} alt="Cover preview" className="size-full object-cover" />
+          <img src={url} alt="Preview" className="size-full object-cover" />
         </div>
       )}
 

@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/shadcn/input";
 import { Label } from "@/components/ui/shadcn/label";
 import { EVENT_BADGES, type EventRow } from "@/db/schema";
 import { BADGE_LABEL } from "@/lib/events";
-import type { EventState } from "../actions";
+import { EventState } from "../actions";
+import CoverImageField from "@/app/admin/_components/CoverImageField";
 
 type Props = {
   action: (prev: EventState, formData: FormData) => Promise<EventState>;
@@ -32,9 +33,7 @@ function Field({
   return (
     <div className="space-y-1.5">
       <Label htmlFor={name}>{label}</Label>
-
       {children}
-
       {error && <p className="text-xs text-red-600">{error}</p>}
     </div>
   );
@@ -45,7 +44,7 @@ export default function EventForm({ action, event, submitLabel }: Props) {
   const err = state.errors ?? {};
 
   // Submit manually so React doesn't reset the fields when validation fails.
-  function onSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     startTransition(() => formAction(fd));
@@ -54,28 +53,29 @@ export default function EventForm({ action, event, submitLabel }: Props) {
   return (
     <form onSubmit={onSubmit} className="max-w-2xl space-y-5 border bg-white p-6">
       <Field label="Title" name="title" error={err.title}>
-        <Input id="title" name="title" defaultValue={event?.title} />
+        <Input id="title" name="title" defaultValue={event?.title} required />
       </Field>
 
       <div className="grid gap-4 sm:grid-cols-3">
         <Field label="Date" name="date" error={err.date}>
-          <Input id="date" name="date" type="date" defaultValue={event?.date} />
+          <Input id="date" name="date" type="date" defaultValue={event?.date} required />
         </Field>
         <Field label="Start" name="startTime" error={err.startTime}>
-          <Input id="startTime" name="startTime" type="time" defaultValue={event?.startTime.slice(0, 5)} />
+          <Input id="startTime" name="startTime" type="time" defaultValue={event?.startTime.slice(0, 5)} required />
         </Field>
         <Field label="End" name="endTime" error={err.endTime}>
-          <Input id="endTime" name="endTime" type="time" defaultValue={event?.endTime.slice(0, 5)} />
+          <Input id="endTime" name="endTime" type="time" defaultValue={event?.endTime.slice(0, 5)} required />
         </Field>
       </div>
 
       <Field label="Location" name="location" error={err.location}>
-        <Input id="location" name="location" defaultValue={event?.location} />
+        <Input id="location" name="location" defaultValue={event?.location} required />
       </Field>
 
-      <Field label="Image (path in https URL)" name="image" error={err.image}>
-        <Input id="image" name="image" placeholder="https://...image.jpg" defaultValue={event?.image} />
-      </Field>
+      <div className="space-y-1.5">
+        <p className="text-sm font-medium">Event image</p>
+        <CoverImageField name="image" folder="events" defaultValue={event?.image} error={err.image} />
+      </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Badge" name="badge" error={err.badge}>
@@ -107,7 +107,9 @@ export default function EventForm({ action, event, submitLabel }: Props) {
         <Button type="submit" disabled={pending}>
           {pending ? "Saving…" : submitLabel}
         </Button>
-        <Button variant="secondary" render={<Link href="/admin/events">Cancel</Link>}></Button>
+        <Link href="/admin/events" className="text-sm text-gray-600 underline">
+          Cancel
+        </Link>
       </div>
     </form>
   );

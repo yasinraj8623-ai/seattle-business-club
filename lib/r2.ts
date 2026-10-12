@@ -1,5 +1,5 @@
 import "server-only";
-import { S3Client } from "@aws-sdk/client-s3";
+import { S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 export const r2 = new S3Client({
   region: "auto",
@@ -12,3 +12,26 @@ export const r2 = new S3Client({
   requestChecksumCalculation: "WHEN_REQUIRED",
   responseChecksumValidation: "WHEN_REQUIRED",
 });
+
+const FOLDERS = ["blog/", "events/"];
+
+// Public URL → object key, or null if the URL isn't one of ours.
+function keyFromUrl(url: string) {
+  const base = `${process.env.R2_PUBLIC_URL!.replace(/\/$/, "")}/`;
+  if (!url.startsWith(base)) return null;
+  const key = url.slice(base.length);
+  return FOLDERS.some((f) => key.startsWith(f)) ? key : null;
+}
+
+// Deletes an uploaded image by its public URL. Ignores /public paths and foreign hosts; never throws.
+export async function deleteR2Image(url: string | null | undefined) {
+  if (!url) return;
+  const key = keyFromUrl(url);
+  if (!key) return;
+
+  try {
+    await r2.send(new DeleteObjectCommand({ Bucket: process.env.R2_BUCKET!, Key: key }));
+  } catch (err) {
+    console.error("deleteR2Image failed", key, err);
+  }
+}

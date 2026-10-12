@@ -10,8 +10,8 @@ import type { BlogRow } from "@/db/schema";
 import { seattleToday } from "@/lib/events";
 import type { BlogState } from "../actions";
 import BlogEditor, { type BlogEditorInstance } from "./BlogEditor";
-import CoverImageField from "./CoverImageField";
 import FormField from "./FormField";
+import CoverImageField from "@/app/admin/_components/CoverImageField";
 
 type Props = {
   action: (prev: BlogState, formData: FormData) => Promise<BlogState>;

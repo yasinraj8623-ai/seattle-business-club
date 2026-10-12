@@ -8,6 +8,7 @@ import { db } from "@/db";
 import { events } from "@/db/schema";
 import { requireAdmin } from "@/lib/admin-auth";
 import { eventSchema } from "@/lib/event-validation";
+import { deleteR2Image } from "@/lib/r2";
 
 export type EventState = { ok: boolean; errors?: Record<string, string>; message?: string };
 export type ActionResult = { ok: true } | { ok: false; error: string };
@@ -54,10 +55,15 @@ export async function updateEvent(id: string, _prev: EventState, formData: FormD
   if (!data) return { ok: false, errors };
 
   try {
+    const [existing] = await db.select({ image: events.image }).from(events).where(eq(events.id, id)).limit(1);
+
     await db
       .update(events)
       .set({ ...data, href: data.href ?? null, updatedAt: new Date() }) // null clears the link
       .where(eq(events.id, id));
+
+    // Only after the DB update succeeded: drop the replaced image from R2.
+    if (existing && existing.image !== data.image) await deleteR2Image(existing.image);
   } catch (err) {
     console.error("updateEvent failed", err);
     return { ok: false, message: "Could not save changes. Try again." };
@@ -72,7 +78,8 @@ export async function deleteEvent(id: string): Promise<ActionResult> {
   if (!z.uuid().safeParse(id).success) return { ok: false, error: "Invalid event." };
 
   try {
-    await db.delete(events).where(eq(events.id, id));
+    const [row] = await db.delete(events).where(eq(events.id, id)).returning({ image: events.image });
+    await deleteR2Image(row?.image); // delete the row first, so a failed R2 delete never leaves a broken event
   } catch (err) {
     console.error("deleteEvent failed", err);
     return { ok: false, error: "Could not delete event." };
