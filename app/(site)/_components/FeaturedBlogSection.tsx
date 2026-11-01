@@ -35,7 +35,7 @@ export default async function FeaturedBlogSection() {
             <h2 className="text-sm font-bold text-[#4A5DF9] tracking-wide">BLOG</h2>
             <div className="flex items-center justify-between gap-5 md:gap-10">
               <h3 className="text-white text-[28px] sm:text-[32px] md:text-[40px] font-medium leading-[120%]">
-                Featured Blog
+                Featured Business
               </h3>
               <SolidLinkButton href="/blogs">Explore more</SolidLinkButton>
             </div>
