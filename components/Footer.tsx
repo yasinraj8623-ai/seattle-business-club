@@ -8,7 +8,7 @@ import { Reveal, slideInLeft, slideInRight } from "@/components/motion/reveal";
 const exploreLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/#services" },
-  { label: "Events", href: "https://www.eventbrite.com" },
+  { label: "Events", href: "/#network-events" },
   { label: "Blogs", href: "/blogs" },
   { label: "Contact", href: "/contact" },
 ];

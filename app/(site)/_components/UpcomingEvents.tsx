@@ -29,7 +29,7 @@ export default async function UpcomingEvents() {
                 </span>
               </h3>
               <div>
-                <MagneticLinkButton className="text-nowrap" href="https://www.eventbrite.com" variant="secondary">
+                <MagneticLinkButton className="text-nowrap" href="#" variant="secondary">
                   Explore Events
                 </MagneticLinkButton>
               </div>
